@@ -1,10 +1,4 @@
 {
-  "extensionVersion": "0.0.1",
-  "name": "MultiClient",
-  "copyToTargets": 17179869280,
-  "androidProps": false,
-  "iosProps": false,
-  "tvosProps": false,
   "optionsFile": "options.json",
   "options": [
     {"extensionId":null,"guid":"5d9f79ea-1b81-4c14-9cdb-bd884ee607e4","displayName":"","description":"","defaultValue":"2","exportToINI":false,"optType":1,"resourceVersion":"1.0","name":"Number_Of_Clients","tags":[],"resourceType":"GMExtensionOption",},
@@ -13,6 +7,7 @@
   ],
   "exportToGame": true,
   "supportedTargets": -1,
+  "extensionVersion": "1.0.0",
   "packageId": "",
   "productId": "",
   "author": "",
@@ -20,6 +15,9 @@
   "license": "",
   "description": "",
   "helpfile": "",
+  "iosProps": false,
+  "tvosProps": false,
+  "androidProps": false,
   "installdir": "",
   "files": [
     {"filename":"post_run_step.bat","origname":"","init":"","final":"","kind":4,"uncompress":false,"functions":[],"constants":[],"ProxyFiles":[],"copyToTargets":-1,"order":[],"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMExtensionFile",},
@@ -52,6 +50,7 @@
   "tvosThirdPartyFrameworkEntries": [],
   "IncludedResources": [],
   "androidPermissions": [],
+  "copyToTargets": 17179869280,
   "iosCocoaPods": "",
   "tvosCocoaPods": "",
   "iosCocoaPodDependencies": "",
@@ -61,6 +60,7 @@
     "path": "MultiClient.yyp",
   },
   "resourceVersion": "1.2",
+  "name": "MultiClient",
   "tags": [],
   "resourceType": "GMExtension",
 }
