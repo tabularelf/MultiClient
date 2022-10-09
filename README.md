@@ -1,6 +1,6 @@
 # MultiClient v1.0.0
  
-A multi client extension for networking development for GameMaker 2022.6
+A multi client extension for networking development for GameMaker 2022.6+
 
 ## How to Install
 1. Download the latest [releases](https://github.com/tabularelf/MultiClient/releases)
