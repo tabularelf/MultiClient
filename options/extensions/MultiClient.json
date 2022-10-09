@@ -1,0 +1,18 @@
+{
+  "extensionId": null,
+  "resourceVersion": "1.0",
+  "resourceType": "GMExtensionConfigSet",
+  "configurables": {
+    "5d9f79ea-1b81-4c14-9cdb-bd884ee607e4": {
+      "Default": {
+        "value": "2"
+      }
+    },
+    "76c270e6-7809-4838-ade8-701846fc795d": {
+      "Default": {
+        "value": "False"
+      }
+    },
+    "c2dbc7f8-515a-443a-b7e7-c7bb0271d8c7": null
+  }
+}
