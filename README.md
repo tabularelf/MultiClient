@@ -8,7 +8,7 @@ A multi client extension for networking development for GameMaker 2022.6+
 3. Press "Add All" and press "Ok".
 4. Run your game.
 
-You can change how many clients boot up upon launch for Windows/Opera GX/HTML5 (Opera GX/HTML5 hasn't been tested in the latest verisons as of yet)<p>
+You can change how many clients boot up upon launch for Windows/GX.games (Opera GX)/HTML5<p>
 By heading over to the extension itself and changing "Number_Of_Clients" to any value.
 You can also check `Enable_Debug_Mode` (Experimental) if you need this to work in the debugger.<p>
 
