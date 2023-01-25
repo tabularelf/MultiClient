@@ -37,6 +37,7 @@ function MultiClientGetID(){
 	return _num;
 }
 
+/// @ignore
 function __MultiClientParseString(_str) {
 	/// feather ignore all 
 	var _equalPos = string_pos("=", _str);

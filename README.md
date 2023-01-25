@@ -1,4 +1,4 @@
-# MultiClient v1.0.1
+# MultiClient v1.0.2
  
 A multi client extension for networking development for GameMaker 2022.6+
 
