@@ -2,6 +2,8 @@
  
 A multi client extension for networking development for GameMaker 2022.6+
 
+Discuss about the extension in `#other_tubular_repos` on the [GameMaker Kitchen Discord Server](https://discord.gg/8krYCqr)!
+
 ## How to Install
 1. Download the latest [releases](https://github.com/tabularelf/MultiClient/releases)
 2. Once downloaded, head over to Tools -> Import Local Package in GameMaker.
