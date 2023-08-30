@@ -1,5 +1,9 @@
 # MultiClient v1.0.2
- 
+
+## NOTICE:
+While I understand that this is a tool designed for testing networking on the same machine with ease, I don't actually provide networking support. You can join the [GameMaker Discord Server](https://discord.gg/gamemaker) instead and ask in the `#netcode` channel for networking consulting.
+Only things that are specifically got to do with MultiClient (bugs or general enquires) can be addressed to me instead. 
+
 A multi client extension for networking development for GameMaker 2022.6+
 
 Discuss about the extension in `#other_tubular_repos` on the [GameMaker Kitchen Discord Server](https://discord.gg/8krYCqr)!
