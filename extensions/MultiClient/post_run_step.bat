@@ -3,6 +3,10 @@ set "MCVersion=1.0.1"
 set "NumOfInsts=%YYEXTOPT_MultiClient_Number_Of_Clients%"
 set "ExecuteInDebug=%YYEXTOPT_MultiClient_Enable_Debug_Mode%"
 set "MaxClients=1"
+set "ShouldProxyClients=%YYEXTOPT_MultiClient_Should_Proxy_Clients%"
+set "ProxyPath=%YYEXTOPT_MultiClient_Proxy_Path%"
+set "ProxyArgs=%YYEXTOPT_MultiClient_Proxy_Args%"
+setlocal enabledelayedexpansion
 
 echo -------------------------
 echo Multi-Client v%MCVersion%: Initialized!
@@ -52,14 +56,42 @@ if [%YYPREF_default_web_address%]==[] (
 )
 :main
 
+set n_clients=0
+set proxy_clients=1
 for /l %%x in (1, %MaxClients%, %NumOfInsts%) do (
 	:: Windows
 	if %YYPLATFORM_name% EQU Windows (
-		if %YYTARGET_runtime% EQU YYC (
-			start /b cmd /C "%YYoutputFolder%\%YYprojectName%.exe" —mc-window-number %%x %YYEXTOPT_MultiClient_Additional_Parameters%
-		) else (
-			start /b cmd /C %YYruntimeLocation%\Windows\x64\runner.exe -game "%YYoutputFolder%\%YYprojectName%.win" —mc-window-number %%x %YYEXTOPT_MultiClient_Additional_Parameters%
-		)
+        if %ShouldProxyClients% EQU True (
+            if !n_clients! EQU 0 (
+                if %YYTARGET_runtime% EQU YYC (
+                    start /b cmd /C "%YYoutputFolder%\%YYprojectName%.exe" —mc-window-number %%x %YYEXTOPT_MultiClient_Additional_Parameters%
+                ) else (
+                    start /b cmd /C %YYruntimeLocation%\Windows\x64\runner.exe -game "%YYoutputFolder%\%YYprojectName%.win" —mc-window-number %%x %YYEXTOPT_MultiClient_Additional_Parameters%
+                )
+            ) else (
+                set token=""
+                for /f "tokens=1 delims=;" %%a in ("!ProxyArgs!") do (
+                    if !proxy_clients! EQU !n_clients! (
+                        set "token=%%a "
+                        echo !counter!
+                        echo !token!
+                    )
+                    set /a proxy_clients+=1
+                )
+                echo Proxying client !n_clients!
+                if %YYTARGET_runtime% EQU YYC (
+                    "%ProxyPath%" !token!"%YYoutputFolder%\%YYprojectName%.exe" —mc-window-number %%x %YYEXTOPT_MultiClient_Additional_Parameters%
+                ) else (
+                    "%ProxyPath%" !token!%YYruntimeLocation%\Windows\x64\runner.exe -game "%YYoutputFolder%\%YYprojectName%.win" —mc-window-number %%x %YYEXTOPT_MultiClient_Additional_Parameters%
+                )
+            )
+        ) else (
+            if %YYTARGET_runtime% EQU YYC (
+                start /b cmd /C "%YYoutputFolder%\%YYprojectName%.exe" —mc-window-number %%x %YYEXTOPT_MultiClient_Additional_Parameters%
+            ) else (
+                start /b cmd /C %YYruntimeLocation%\Windows\x64\runner.exe -game "%YYoutputFolder%\%YYprojectName%.win" —mc-window-number %%x %YYEXTOPT_MultiClient_Additional_Parameters%
+            )
+        )
 	)
 	
 	if %YYPLATFORM_name% EQU HTML5 (
@@ -69,6 +101,8 @@ for /l %%x in (1, %MaxClients%, %NumOfInsts%) do (
 	if %YYPLATFORM_name% EQU operagx (
 		start /b %YYPREF_default_web_address%:%YYPREF_default_webserver_port%/runner.html?game=%YYPLATFORM_option_operagx_game_name%^&mc-window-number=%%x
 	)
+
+    set /a n_clients+=1
 )
 
 if %YYPLATFORM_name% NEQ operagx (
