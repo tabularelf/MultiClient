@@ -11,9 +11,15 @@ setlocal enabledelayedexpansion
 cd "%YYoutputFolder%\%YYprojectName%"
 
 echo -------------------------
-echo Multi-Client v%MCVersion%: Initialized!
+echo MultiClient v%MCVersion%: Initializing!
+if %NumOfInsts% LEQ 1 (
+	echo MultiClient: Number of clients has been reduced to less than or equal to 1. Disabling MultiClient...
+	echo -------------------------
+	exit 0
+)
+
 if %YYPLATFORM_name% NEQ operagx if %YYPLATFORM_name% NEQ HTML5 if %YYPLATFORM_name% NEQ Windows (
-	echo Multi-Client: This does not work on other platforms at this time.
+	echo MultiClient: This does not work on other platforms at this time.
 	echo -------------------------
 	exit 0
 ) 
@@ -22,14 +28,13 @@ rem Main Execution.
 if %YYdebug% EQU True (
 	if %YYPLATFORM_name% NEQ operagx (
 		if %YYPLATFORM_name% NEQ HTML5 (
-			echo Multi-Client: Warning - This doesn't fully support debug mode. By default this is off within the extension options!
 			if %ExecuteInDebug% EQU False (
-				echo Multi-Client: Workaround not enabled... Exiting safely...
+				echo MultiClient: Workaround not enabled... Exiting safely...
 				echo -------------------------
 				exit 0
 			) else (
-				echo Multi-Client: ExecuteInDebug is set to True, will attempt workaround...
-				echo Multi-Client: ClientID's increased by 4.
+				echo MultiClient: ExecuteInDebug is set to True, will attempt workaround...
+				echo MultiClient: ClientID's increased by 4.
 				set /A NumOfInsts=%NumOfInsts%+4
 			)
 		)
@@ -44,15 +49,15 @@ goto main
 set /a "NumOfInsts=%NumOfInsts%-1"
 set /a "MaxClients=%MaxClients%+1"
 if [%YYPREF_default_web_address%]==[] (
-	echo Multi-Client: Failed to find YYPREF_default_web_address ^& YYPREF_default_webserver_port. Is Web runner running? 
+	echo MultiClient: Failed to find YYPREF_default_web_address ^& YYPREF_default_webserver_port. Is Web runner running? 
 	if %YYEXTOPT_MultiClient_Use_GM_Web_Fallback% EQU False (
-		echo Multi-Client: Use_GM_Web_Fallback is set to False. Please ensure that webserver is running or set Use_GM_Web_Preset to True.
+		echo MultiClient: Use_GM_Web_Fallback is set to False. Please ensure that webserver is running or set Use_GM_Web_Preset to True.
 		echo -------------------------
 		exit 1
 	)
 	
-	echo Multi-Client: Use_GM_Web_Fallback is set to True. Using preset.
-	echo Multi-Client: Defaulting to %YYEXTOPT_MultiClient_GM_Web_Fallback_Address%:%YYEXTOPT_MultiClient_GM_Web_Fallback_Port%
+	echo MultiClient: Use_GM_Web_Fallback is set to True. Using preset.
+	echo MultiClient: Defaulting to %YYEXTOPT_MultiClient_GM_Web_Fallback_Address%:%YYEXTOPT_MultiClient_GM_Web_Fallback_Port%
 	set YYPREF_default_web_address=%YYEXTOPT_MultiClient_GM_Web_Fallback_Address%
 	set YYPREF_default_webserver_port=%YYEXTOPT_MultiClient_GM_Web_Fallback_Port%
 )
@@ -112,11 +117,11 @@ if %YYPLATFORM_name% NEQ operagx (
 )
 goto WebClientExit
 :exitIgor
-echo Multi-Client: This will exit with a exit code of 1. Igor will "fail". This is intentional.
+echo MultiClient: This will exit with a exit code of 1. Igor will "fail". This is intentional.
 echo -------------------------
 exit 1
 
 :WebClientExit
-echo Multi-Client: Task completed!
+echo MultiClient: Task completed!
 echo -------------------------
 exit 0

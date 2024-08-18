@@ -43,7 +43,7 @@ function MultiClientGetID(){
 					
 					// use sockets as a way to count how many windows have been initialized
 					var _i = 0;
-					repeat(_clientNumber) {
+					repeat(_clientNumber ?? 0) {
 						var _socket = network_create_socket_ext(network_socket_tcp, _searchPort);
 						if (_socket >= 0) {
 							// ensure that the last client created has an index of 0
@@ -52,7 +52,7 @@ function MultiClientGetID(){
 							_num = (_clientNumber-1) - _i;
 							
 							// destroy this socket after a second
-							call_later(1000, time_source_units_seconds, method({
+							call_later(1, time_source_units_seconds, method({
 								__socket: _socket,
 							}, function() {
 								network_destroy(__socket);
