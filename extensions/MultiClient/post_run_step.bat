@@ -66,9 +66,9 @@ for /l %%x in (1, %MaxClients%, %NumOfInsts%) do (
         if %ShouldProxyClients% EQU True (
             if !n_clients! EQU 0 (
                 if %YYTARGET_runtime% EQU YYC (
-                    start /b cmd /C "%YYoutputFolder%\%YYprojectName%.exe" —mc-window-number %%x %YYEXTOPT_MultiClient_Additional_Parameters%
+                    start /b cmd /C "%YYoutputFolder%\%YYprojectName%.exe" —mc-window-number %%x —mc-client-number %YYEXTOPT_MultiClient_Number_Of_Clients% —mc-search-port %YYEXTOPT_MultiClient_Search_Port%" %YYEXTOPT_MultiClient_Additional_Parameters%
                 ) else (
-                    start /b cmd /C %YYruntimeLocation%\Windows\x64\runner.exe -game "%YYoutputFolder%\%YYprojectName%.win" —mc-window-number %%x %YYEXTOPT_MultiClient_Additional_Parameters%
+                    start /b cmd /C %YYruntimeLocation%\Windows\x64\runner.exe -game "%YYoutputFolder%\%YYprojectName%.win" —mc-window-number %%x —mc-client-number %YYEXTOPT_MultiClient_Number_Of_Clients% —mc-search-port %YYEXTOPT_MultiClient_Search_Port%" %YYEXTOPT_MultiClient_Additional_Parameters%
                 )
             ) else (
                 set token=""
@@ -82,16 +82,16 @@ for /l %%x in (1, %MaxClients%, %NumOfInsts%) do (
                 )
                 echo Proxying client !n_clients!
                 if %YYTARGET_runtime% EQU YYC (
-                    "%ProxyPath%" !token!"%YYoutputFolder%\%YYprojectName%.exe" —mc-window-number %%x %YYEXTOPT_MultiClient_Additional_Parameters%
+                    "%ProxyPath%" !token!"%YYoutputFolder%\%YYprojectName%.exe" —mc-window-number %%x —mc-client-number %MaxClients% —mc-search-port %YYEXTOPT_MultiClient_Search_Port%" %YYEXTOPT_MultiClient_Additional_Parameters%
                 ) else (
-                    "%ProxyPath%" !token!%YYruntimeLocation%\Windows\x64\runner.exe -game "%YYoutputFolder%\%YYprojectName%.win" —mc-window-number %%x %YYEXTOPT_MultiClient_Additional_Parameters%
+                    "%ProxyPath%" !token!%YYruntimeLocation%\Windows\x64\runner.exe -game "%YYoutputFolder%\%YYprojectName%.win" —mc-window-number %%x —mc-client-number %YYEXTOPT_MultiClient_Number_Of_Clients% —mc-search-port %YYEXTOPT_MultiClient_Search_Port%" %YYEXTOPT_MultiClient_Additional_Parameters%
                 )
             )
         ) else (
             if %YYTARGET_runtime% EQU YYC (
-                start /b cmd /C "%YYoutputFolder%\%YYprojectName%.exe" —mc-window-number %%x %YYEXTOPT_MultiClient_Additional_Parameters%
+                start /b cmd /C "%YYoutputFolder%\%YYprojectName%.exe" —mc-window-number %%x -mc-client-number %MaxClients% —mc-search-port %YYEXTOPT_MultiClient_Search_Port%" %YYEXTOPT_MultiClient_Additional_Parameters%
             ) else (
-                start /b cmd /C %YYruntimeLocation%\Windows\x64\runner.exe -game "%YYoutputFolder%\%YYprojectName%.win" —mc-window-number %%x %YYEXTOPT_MultiClient_Additional_Parameters%
+                start /b cmd /C %YYruntimeLocation%\Windows\x64\runner.exe -game "%YYoutputFolder%\%YYprojectName%.win" —mc-window-number %%x —mc-client-number %YYEXTOPT_MultiClient_Number_Of_Clients% —mc-search-port %YYEXTOPT_MultiClient_Search_Port%" %YYEXTOPT_MultiClient_Additional_Parameters%
             )
         )
 	)

@@ -6,7 +6,7 @@ Only things that are specifically got to do with MultiClient (bugs or general en
 
 A multi client extension for networking development for GameMaker 2022.6+
 
-Discuss about the extension in `#other_tubular_repos` on the [GameMaker Kitchen Discord Server](https://discord.gg/8krYCqr)!
+If you have any questions or issues, please submit an issue!
 
 ## How to Install
 1. Download the latest [releases](https://github.com/tabularelf/MultiClient/releases)
