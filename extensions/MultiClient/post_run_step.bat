@@ -1,5 +1,5 @@
 @echo off
-set "MCVersion=1.0.1"
+set "MCVersion=%GMEXT_MultiClient_VERSION%"
 set "NumOfInsts=%YYEXTOPT_MultiClient_Number_Of_Clients%"
 set "ExecuteInDebug=%YYEXTOPT_MultiClient_Enable_Debug_Mode%"
 set "MaxClients=1"
@@ -7,6 +7,8 @@ set "ShouldProxyClients=%YYEXTOPT_MultiClient_Should_Proxy_Clients%"
 set "ProxyPath=%YYEXTOPT_MultiClient_Proxy_Path%"
 set "ProxyArgs=%YYEXTOPT_MultiClient_Proxy_Args%"
 setlocal enabledelayedexpansion
+
+cd "%YYoutputFolder%\%YYprojectName%"
 
 echo -------------------------
 echo Multi-Client v%MCVersion%: Initialized!
