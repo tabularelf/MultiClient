@@ -15,6 +15,7 @@
     {"resourceType":"GMExtensionOption","resourceVersion":"1.0","name":"Should_Proxy_Clients","extensionId":null,"guid":"b29b41e4-3d53-4a72-b082-0eb3d51bd81d","displayName":"Proxy subsequent clients","listItems":[],"description":"Should subsequent clients be ran through a proxy? (Sandboxie etc)","defaultValue":"False","exportToINI":false,"hidden":false,"optType":0,},
     {"resourceType":"GMExtensionOption","resourceVersion":"1.0","name":"Proxy_Path","extensionId":null,"guid":"ab4971c8-45fa-4411-a982-e16a3af58307","displayName":"Proxy path","listItems":[],"description":"What application should be used to proxy ","defaultValue":"","exportToINI":false,"hidden":false,"optType":3,},
     {"resourceType":"GMExtensionOption","resourceVersion":"1.0","name":"Proxy_Args","extensionId":null,"guid":"e61f4ac7-53ac-46e2-b0c8-a949f1acd862","displayName":"Proxy arguments","listItems":[],"description":"Arguments for your proxy (/box:<boxName> for Sandboxie for instance)\r\nArgs for each client are separated by semicolons\r\n(example: -client2Args;-client3Args;-client4Args )","defaultValue":"","exportToINI":false,"hidden":false,"optType":2,},
+    {"resourceType":"GMExtensionOption","resourceVersion":"1.0","name":"Search_Port","extensionId":null,"guid":"f506fe0e-5a82-4155-8b2a-69e6e6053844","displayName":"Debug mode search port","listItems":[],"description":"","defaultValue":"19839","exportToINI":false,"hidden":false,"optType":1,},
   ],
   "exportToGame": true,
   "supportedTargets": -1,
