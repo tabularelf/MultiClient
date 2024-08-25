@@ -61,7 +61,7 @@
   "tvosThirdPartyFrameworkEntries": [],
   "IncludedResources": [],
   "androidPermissions": [],
-  "copyToTargets": 17179869280,
+  "copyToTargets": 17179869282,
   "iosCocoaPods": "",
   "tvosCocoaPods": "",
   "iosCocoaPodDependencies": "",
