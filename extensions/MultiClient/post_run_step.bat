@@ -6,7 +6,13 @@ set "MaxClients=1"
 set "ShouldProxyClients=%YYEXTOPT_MultiClient_Should_Proxy_Clients%"
 set "ProxyPath=%YYEXTOPT_MultiClient_Proxy_Path%"
 set "ProxyArgs=%YYEXTOPT_MultiClient_Proxy_Args%"
+set "UsingDebug=%YYDebug%"
+set "VMPath=%YYRuntimeLocation%"
 setlocal enabledelayedexpansion
+
+if %UsingDebug% EQU "" (
+	set %UsingDebug=False%
+)
 
 cd "%YYoutputFolder%"
 
@@ -25,7 +31,7 @@ if %YYPLATFORM_name% NEQ operagx if %YYPLATFORM_name% NEQ HTML5 if %YYPLATFORM_n
 ) 
 
 rem Main Execution. 
-if %YYdebug% EQU True (
+if !UsingDebug! EQU True (
 	if %YYPLATFORM_name% NEQ operagx (
 		if %YYPLATFORM_name% NEQ HTML5 (
 			if %ExecuteInDebug% EQU False (
