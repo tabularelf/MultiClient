@@ -1,4 +1,4 @@
-# MultiClient v1.0.5
+# MultiClient v1.1.1
 
 ## NOTICE:
 While I understand that this is a tool designed for testing networking on the same machine with ease, I don't actually provide networking support. You can join the [GameMaker Discord Server](https://discord.gg/gamemaker) instead and ask in the `#netcode` channel for networking consulting.
