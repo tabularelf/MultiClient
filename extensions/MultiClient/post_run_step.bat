@@ -102,7 +102,7 @@ for /l %%x in (1, %MaxClients%, %NumOfInsts%) do (
             if %YYTARGET_runtime% EQU YYC (
                 start /b cmd /C "%YYoutputFolder%\%YYprojectName%.exe —mc-window-number %%x -mc-client-number %MaxClients% —mc-search-port %YYEXTOPT_MultiClient_Search_Port% %YYEXTOPT_MultiClient_Additional_Parameters%"
             ) else (
-                start /b cmd /C "%YYruntimeLocation%\Windows\x64\runner.exe -game %YYoutputFolder%\%YYprojectName%.win —mc-window-number %%x —mc-client-number %YYEXTOPT_MultiClient_Number_Of_Clients% —mc-search-port %YYEXTOPT_MultiClient_Search_Port% %YYEXTOPT_MultiClient_Additional_Parameters%"
+                start /b cmd /C "%YYruntimeLocation%\Windows\x64\runner.exe -game "%YYoutputFolder%\%YYprojectName%.win" —mc-window-number %%x —mc-client-number %YYEXTOPT_MultiClient_Number_Of_Clients% —mc-search-port %YYEXTOPT_MultiClient_Search_Port% %YYEXTOPT_MultiClient_Additional_Parameters%"
             )
 			if %YYEXTOPT_MultiClient_Delay_Startup% EQU True (
 				timeout %YYEXTOPT_MultiClient_Delay_Number%
