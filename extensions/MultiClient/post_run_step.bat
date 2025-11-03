@@ -8,9 +8,10 @@ set "ProxyPath=%YYEXTOPT_MultiClient_Proxy_Path%"
 set "ProxyArgs=%YYEXTOPT_MultiClient_Proxy_Args%"
 set "UsingDebug=%YYDebug%"
 set "VMPath=%YYRuntimeLocation%"
+for /f %%i in ('dir "%YYoutputFolder%" /b /a ^| findstr .win[0-9]*$') do set VMWin=%%i
 setlocal enabledelayedexpansion
 
-if %UsingDebug% EQU "" (
+if "%UsingDebug%"=="" (
 	set %UsingDebug=False%
 )
 
@@ -76,10 +77,10 @@ for /l %%x in (1, %MaxClients%, %NumOfInsts%) do (
 	if %YYPLATFORM_name% EQU Windows (
         if %ShouldProxyClients% EQU True (
             if !n_clients! EQU 0 (
-                if %YYTARGET_runtime% EQU YYC (
+                if "%YYTARGET_runtime%"=="YYC" (
                     start /b cmd /C "%YYoutputFolder%\%YYprojectName%.exe" —mc-window-number %%x —mc-client-number %YYEXTOPT_MultiClient_Number_Of_Clients% —mc-search-port %YYEXTOPT_MultiClient_Search_Port% %YYEXTOPT_MultiClient_Additional_Parameters%
                 ) else (
-                    start /b cmd /C %YYruntimeLocation%\Windows\x64\runner.exe -game "%YYoutputFolder%\%YYprojectName%.win" —mc-window-number %%x —mc-client-number %YYEXTOPT_MultiClient_Number_Of_Clients% —mc-search-port %YYEXTOPT_MultiClient_Search_Port% %YYEXTOPT_MultiClient_Additional_Parameters%
+                    start /b cmd /C %YYruntimeLocation%\Windows\x64\runner.exe -game "%YYoutputFolder%\%VMWin%" —mc-window-number %%x —mc-client-number %YYEXTOPT_MultiClient_Number_Of_Clients% —mc-search-port %YYEXTOPT_MultiClient_Search_Port% %YYEXTOPT_MultiClient_Additional_Parameters%
                 )
             ) else (
                 set token=""
@@ -92,17 +93,17 @@ for /l %%x in (1, %MaxClients%, %NumOfInsts%) do (
                     set /a proxy_clients+=1
                 )
                 echo Proxying client !n_clients!
-                if %YYTARGET_runtime% EQU YYC (
+                if "%YYTARGET_runtime%"=="YYC" (
                     "%ProxyPath%" !token!"%YYoutputFolder%\%YYprojectName%.exe" —mc-window-number %%x —mc-client-number %MaxClients% —mc-search-port %YYEXTOPT_MultiClient_Search_Port%" %YYEXTOPT_MultiClient_Additional_Parameters%
                 ) else (
-                    "%ProxyPath%" !token!%YYruntimeLocation%\Windows\x64\runner.exe -game "%YYoutputFolder%\%YYprojectName%.win" —mc-window-number %%x —mc-client-number %YYEXTOPT_MultiClient_Number_Of_Clients% —mc-search-port %YYEXTOPT_MultiClient_Search_Port% %YYEXTOPT_MultiClient_Additional_Parameters%
+                    "%ProxyPath%" !token!%YYruntimeLocation%\Windows\x64\runner.exe -game "%YYoutputFolder%\%VMWin%" —mc-window-number %%x —mc-client-number %YYEXTOPT_MultiClient_Number_Of_Clients% —mc-search-port %YYEXTOPT_MultiClient_Search_Port% %YYEXTOPT_MultiClient_Additional_Parameters%
                 )
             )
         ) else (
-            if %YYTARGET_runtime% EQU YYC (
+            if "%YYTARGET_runtime%"=="YYC" (
                 start /b cmd /C "%YYoutputFolder%\%YYprojectName%.exe —mc-window-number %%x -mc-client-number %MaxClients% —mc-search-port %YYEXTOPT_MultiClient_Search_Port% %YYEXTOPT_MultiClient_Additional_Parameters%"
             ) else (
-                start /b cmd /C "%YYruntimeLocation%\Windows\x64\runner.exe -game "%YYoutputFolder%\%YYprojectName%.win" —mc-window-number %%x —mc-client-number %YYEXTOPT_MultiClient_Number_Of_Clients% —mc-search-port %YYEXTOPT_MultiClient_Search_Port% %YYEXTOPT_MultiClient_Additional_Parameters%"
+                start /b cmd /C "%YYruntimeLocation%\Windows\x64\runner.exe -game "%YYoutputFolder%\%VMWin%" —mc-window-number %%x —mc-client-number %YYEXTOPT_MultiClient_Number_Of_Clients% —mc-search-port %YYEXTOPT_MultiClient_Search_Port% %YYEXTOPT_MultiClient_Additional_Parameters%"
             )
 			if %YYEXTOPT_MultiClient_Delay_Startup% EQU True (
 				timeout %YYEXTOPT_MultiClient_Delay_Number%
