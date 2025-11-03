@@ -52,7 +52,7 @@ function MultiClientGetID(){
 							_num = (_clientNumber-1) - _i;
 							
 							// destroy this socket after a second
-							call_later(1, time_source_units_seconds, method({
+							call_later(3, time_source_units_seconds, method({
 								__socket: _socket,
 							}, function() {
 								network_destroy(__socket);
