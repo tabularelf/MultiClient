@@ -1,4 +1,6 @@
 @echo off
+cd "%YYoutputFolder%"
+
 set "MCVersion=%GMEXT_MultiClient_VERSION%"
 set "NumOfInsts=%YYEXTOPT_MultiClient_Number_Of_Clients%"
 set "ExecuteInDebug=%YYEXTOPT_MultiClient_Enable_Debug_Mode%"
@@ -8,14 +10,18 @@ set "ProxyPath=%YYEXTOPT_MultiClient_Proxy_Path%"
 set "ProxyArgs=%YYEXTOPT_MultiClient_Proxy_Args%"
 set "UsingDebug=%YYDebug%"
 set "VMPath=%YYRuntimeLocation%"
-for /f %%i in ('dir "%YYoutputFolder%" /b /a ^| findstr .win[0-9]*$') do set VMWin=%%i
+for /f "delims=" %%i in ('dir "%YYoutputFolder%" /b /a ^| findstr .win*$') do (
+	set "VMWin=%%i"
+)
+
+for /f "delims=" %%i in ('dir "%YYoutputFolder%" /b /a ^| findstr .exe*$') do (
+	set "YYCEXE=%%i"
+)
 setlocal enabledelayedexpansion
 
 if "%UsingDebug%"=="" (
 	set %UsingDebug=False%
 )
-
-cd "%YYoutputFolder%"
 
 echo -------------------------
 echo MultiClient v%MCVersion%: Initializing!
@@ -101,9 +107,13 @@ for /l %%x in (1, %MaxClients%, %NumOfInsts%) do (
             )
         ) else (
             if "%YYTARGET_runtime%"=="YYC" (
-                start /b cmd /C "%YYoutputFolder%\%YYprojectName%.exe —mc-window-number %%x -mc-client-number %MaxClients% —mc-search-port %YYEXTOPT_MultiClient_Search_Port% %YYEXTOPT_MultiClient_Additional_Parameters%"
+				start /b "" "%YYoutputFolder%\%YYCEXE%" ^
+					--mc-window-number %%x ^
+					--mc-client-number %MaxClients% ^
+					--mc-search-port %YYEXTOPT_MultiClient_Search_Port% ^
+					%YYEXTOPT_MultiClient_Additional_Parameters%
             ) else (
-                start /b cmd /C "%YYruntimeLocation%\Windows\x64\runner.exe -game "%YYoutputFolder%\%VMWin%" —mc-window-number %%x —mc-client-number %YYEXTOPT_MultiClient_Number_Of_Clients% —mc-search-port %YYEXTOPT_MultiClient_Search_Port% %YYEXTOPT_MultiClient_Additional_Parameters%"
+                start /b "" cmd /C ^""%YYruntimeLocation%\Windows\x64\runner.exe" -game "%YYoutputFolder%\%VMWin%" —mc-window-number %%x —mc-client-number %YYEXTOPT_MultiClient_Number_Of_Clients% —mc-search-port %YYEXTOPT_MultiClient_Search_Port% %YYEXTOPT_MultiClient_Additional_Parameters%"
             )
 			if %YYEXTOPT_MultiClient_Delay_Startup% EQU True (
 				timeout %YYEXTOPT_MultiClient_Delay_Number%

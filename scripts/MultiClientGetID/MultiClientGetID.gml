@@ -64,7 +64,8 @@ function MultiClientGetID(){
 					}
 				} else {
 					repeat(parameter_count()) {
-						if (parameter_string(_i) == "mc-window-number") {
+						// YYC is a lil cursed here, so I'm doing two checks... One more direct than the other.
+						if (parameter_string(_i) == "--mc-window-number") || (parameter_string(_i) == "mc-window-number") {
 							_num = real(parameter_string(_i+1))-1;
 							break;
 						}
