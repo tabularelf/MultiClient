@@ -51,8 +51,10 @@ function MultiClientGetID(){
 							// this means that client index 0 will be the "main" instance hooked up to the debugger
 							_num = (_clientNumber-1) - _i;
 							
-							// destroy this socket after a second
-							call_later(3, time_source_units_seconds, method({
+							// destroy this socket after however much time we need
+							var _delay = max(extension_get_option_value("MultiClient", "Delay_Number"), 1)
+										*MultiClientGetNumberOfClients()+3;
+							call_later(_delay, time_source_units_seconds, method({
 								__socket: _socket,
 							}, function() {
 								network_destroy(__socket);
@@ -92,3 +94,4 @@ function __MultiClientParseString(_str) {
 	
 	return undefined;
 }
+MultiClientGetID();
